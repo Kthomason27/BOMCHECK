@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <h1>🎨 DESIGN MOCKUP: Position # Calculation Feature</h1>
+    <title>Preview Calculation Button Flow</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .scenario {
+        background: white;
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .scenario h3 {
+        margin-top: 0;
+        color: #333;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin: 15px 0;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+
+      .btn-success {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .btn-success:hover {
+        background-color: #1e7e34;
+      }
+
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background-color: #545b62;
+      }
+
+      .status-box {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .status-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+      }
+
+      .status-icon {
+        margin-right: 10px;
+        font-size: 16px;
+      }
+
+      .preview-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 15px 0;
+        font-size: 12px;
+      }
+
+      .preview-table th,
+      .preview-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .preview-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      .new-column {
+        background-color: #fff3cd;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 800px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: #007bff;
+        transition: width 0.3s ease;
+      }
+
+      .alert {
+        padding: 12px;
+        border-radius: 6px;
+        margin: 10px 0;
+      }
+
+      .alert-warning {
+        background-color: #fff3cd;
+        border: 1px solid #ffeaa7;
+        color: #856404;
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Preview Calculation Button Flow Examples</h1>
+
+    <div class="scenario">
+      <h3>Step 1: Initial State (NPD File Loaded)</h3>
+      <div class="status-box">
+        <div class="status-item">
+          <span class="status-icon">✅</span>
+          <span>NPD file loaded: 245 items found</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon">📋</span>
+          <span>38 items missing Position # (will be calculated)</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon">ℹ️</span>
+          <span
+            >Ready to calculate Position # using Description and Item #
+            rules</span
+          >
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="btn btn-primary">🔢 Preview Position Calculation</button>
+        <span style="color: #666; font-size: 12px"
+          >See calculated positions before updating your file</span
+        >
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>Step 2: Preview Modal (After clicking "Preview Calculation")</h3>
+      <div class="modal" style="position: relative; max-width: none">
+        <h4>🔢 Position # Calculation Preview</h4>
+
+        <div class="alert alert-success">
+          <strong>✅ Calculation Complete!</strong> Ready to update Position #
+          values in your NPD file.
+        </div>
+
+        <div class="status-box">
+          <div class="status-item">
+            <span class="status-icon">🔢</span>
+            <span>35 missing Position # values calculated</span>
+          </div>
+          <div class="status-item">
+            <span class="status-icon">✅</span>
+            <span>207 existing Position # values unchanged</span>
+          </div>
+          <div class="status-item">
+            <span class="status-icon">⚠️</span>
+            <span>3 items need manual review (ambiguous descriptions)</span>
+          </div>
+        </div>
+
+        <p>
+          <strong
+            >Calculated Position # (first 5 items that were missing):</strong
+          >
+        </p>
+        <table class="preview-table">
+          <thead>
+            <tr>
+              <th>Kit #</th>
+              <th>Item #</th>
+              <th>Description</th>
+              <th>Current Position #</th>
+              <th class="new-column">Calculated Position # (NEW)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A123</td>
+              <td>ITM-001</td>
+              <td>Main Housing Assembly</td>
+              <td style="color: #999">(empty)</td>
+              <td class="new-column">1</td>
+            </tr>
+            <tr>
+              <td>A123</td>
+              <td>ITM-002</td>
+              <td>Secondary Mounting Bracket</td>
+              <td style="color: #999">(empty)</td>
+              <td class="new-column">2</td>
+            </tr>
+            <tr>
+              <td>B456</td>
+              <td>ITM-003</td>
+              <td>Primary Control Unit</td>
+              <td style="color: #999">(empty)</td>
+              <td class="new-column">1</td>
+            </tr>
+            <tr>
+              <td>B456</td>
+              <td>ITM-004</td>
+              <td>Optional Accessory Kit</td>
+              <td style="color: #999">(empty)</td>
+              <td class="new-column">10</td>
+            </tr>
+            <tr>
+              <td>C789</td>
+              <td>ITM-005</td>
+              <td>Standard Cable Assembly - Type A</td>
+              <td style="color: #999">(empty)</td>
+              <td class="new-column" style="color: #dc3545">
+                ⚠️ Review Needed
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div
+          class="button-container"
+          style="justify-content: flex-end; margin-top: 20px"
+        >
+          <button class="btn btn-secondary">❌ Cancel</button>
+          <button class="btn btn-success">
+            ✅ Looks Good, Update Position #
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>
+        Step 3: Processing State (After clicking "Looks Good, Update Position
+        #")
+      </h3>
+      <div class="status-box">
+        <div class="status-item">
+          <span class="status-icon">⏳</span>
+          <span>Updating Position # values in NPD file...</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 75%"></div>
+        </div>
+        <div style="text-align: center; font-size: 12px; color: #666">
+          Processing 28 of 35 missing positions (80%)
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="btn btn-secondary" disabled style="opacity: 0.6">
+          ⏳ Processing...
+        </button>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>Step 4: Download Ready (Processing Complete)</h3>
+      <div class="alert alert-success">
+        <strong>🎉 Success!</strong> Your NPD file has been updated with
+        calculated Position # values.
+      </div>
+
+      <div class="status-box">
+        <div class="status-item">
+          <span class="status-icon">✅</span>
+          <span>35 Position # values calculated and added</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon">📄</span>
+          <span
+            >File will be saved as:
+            <strong>NPD_with_Position_Numbers_2024-08-04.xlsx</strong></span
+          >
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="btn btn-success">💾 Download Updated File</button>
+        <button class="btn btn-secondary">🔄 Recalculate Positions</button>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h3>Step 5: Error Handling Example</h3>
+      <div class="alert alert-warning">
+        <strong>⚠️ Some Positions Need Review:</strong> Couldn't automatically
+        determine Position # for all items.
+      </div>
+
+      <div class="status-box">
+        <div class="status-item">
+          <span class="status-icon">✅</span>
+          <span>32 Position # values calculated successfully</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon">❌</span>
+          <span>3 items need manual review: Ambiguous descriptions</span>
+        </div>
+      </div>
+
+      <p><strong>Items needing manual Position # assignment:</strong></p>
+      <table class="preview-table">
+        <thead>
+          <tr>
+            <th>Kit #</th>
+            <th>Item #</th>
+            <th>Description</th>
+            <th>Issue</th>
+            <th>Suggested Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C789</td>
+            <td>ITM-005</td>
+            <td>Cable Assembly - Type A</td>
+            <td>Multiple cable types found</td>
+            <td>Specify primary vs secondary cable</td>
+          </tr>
+          <tr>
+            <td>D123</td>
+            <td>ITM-010</td>
+            <td>Miscellaneous Hardware</td>
+            <td>Generic description</td>
+            <td>Add specific hardware type to description</td>
+          </tr>
+          <tr>
+            <td>A456</td>
+            <td>ITM-015</td>
+            <td>Custom Part - See Engineering</td>
+            <td>Custom item without standard position</td>
+            <td>Contact engineering for position assignment</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="button-container">
+        <button class="btn btn-success">
+          💾 Download with Calculated Positions
+        </button>
+        <button class="btn btn-primary">
+          ✏️ Manually Assign Missing Positions
+        </button>
+        <button class="btn btn-secondary">❌ Cancel</button>
+      </div>
+    </div>
+  </body>
+</html>
